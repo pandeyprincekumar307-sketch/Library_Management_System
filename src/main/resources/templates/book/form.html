@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head(${book.id} == null ? 'Add Book' : 'Edit Book')}"></head>
+<body>
+<nav th:replace="~{fragments/header :: navbar}"></nav>
+<div th:replace="~{fragments/header :: alerts}"></div>
+
+<div class="container">
+    <h2 th:text="${book.id} == null ? 'Add Book' : 'Edit Book'">Add Book</h2>
+
+    <div class="card p-4" style="max-width: 640px;">
+        <form method="post" th:action="@{/books/save}" th:object="${book}">
+            <input type="hidden" th:field="*{id}">
+
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                <input type="text" class="form-control" th:field="*{title}" th:classappend="${#fields.hasErrors('title')} ? 'is-invalid'">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Author</label>
+                <input type="text" class="form-control" th:field="*{author}"
+                       th:classappend="${#fields.hasErrors('author')} ? 'is-invalid'">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Total Copies</label>
+                <input type="number" min="0" class="form-control" th:field="*{totalCopies}"
+                       th:classappend="${#fields.hasErrors('totalCopies')} ? 'is-invalid'">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('totalCopies')}" th:errors="*{totalCopies}"></div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Categories</label>
+                <select class="form-select" multiple th:field="*{categories}" size="5">
+                    <option th:each="c : ${allCategories}" th:value="${c.id}" th:text="${c.name}"></option>
+                </select>
+                <small class="text-muted">Hold Ctrl / Cmd to select multiple categories.</small>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a class="btn btn-outline-secondary" th:href="@{/books}">Cancel</a>
+        </form>
+    </div>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+<div th:replace="~{fragments/footer :: scripts}"></div>
+</body>
+</html>

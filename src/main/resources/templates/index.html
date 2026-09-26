@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Dashboard')}"></head>
+<body>
+<nav th:replace="~{fragments/header :: navbar}"></nav>
+<div th:replace="~{fragments/header :: alerts}"></div>
+<div class="container">
+    <div class="hero">
+        <h1 class="mb-2">Welcome to Library Manager</h1>
+        <p class="mb-0">Track Books, Members, Categories, and Borrow/Return activity in one place.</p>
+    </div>
+    <div class="row g-3 mb-4">
+        <div class="col-6 col-md-3">
+            <div class="stat-card">
+                <div class="stat-value" th:text="${bookCount}">0</div>
+                <div class="stat-label">Books</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="stat-card">
+                <div class="stat-value" th:text="${memberCount}">0</div>
+                <div class="stat-label">Members</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="stat-card">
+                <div class="stat-value" th:text="${categoryCount}">0</div>
+                <div class="stat-label">Categories</div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="stat-card">
+                <div class="stat-value" th:text="${borrowCount}">0</div>
+                <div class="stat-label">Active Borrows</div>
+            </div>
+        </div>
+    </div>
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <a th:href="@{/books}" class="card text-decoration-none p-3 d-block">
+                <h5 class="card-title mb-1">📖 Books</h5>
+                <small class="text-muted">Browse and manage the catalogue</small>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a th:href="@{/member}" class="card text-decoration-none p-3 d-block">
+                <h5 class="card-title mb-1">🧑‍🤝‍🧑 Members</h5>
+                <small class="text-muted">Manage library members</small>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a th:href="@{/categories}" class="card text-decoration-none p-3 d-block">
+                <h5 class="card-title mb-1">🏷️ Categories</h5>
+                <small class="text-muted">Organize books by category</small>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a th:href="@{/borrow}" class="card text-decoration-none p-3 d-block">
+                <h5 class="card-title mb-1">🔄 Borrow / Return</h5>
+                <small class="text-muted">Issue and return books</small>
+            </a>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragments/footer :: footer}"></div>
+<div th:replace="~{fragments/footer :: scripts}"></div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Issue Book')}"></head>
+<body>
+<nav th:replace="~{fragments/header :: navbar}"></nav>
+<div th:replace="~{fragments/header :: alerts}"></div>
+
+<div class="container">
+    <h2>Issue Book</h2>
+
+    <div class="card p-4" style="max-width: 640px;">
+        <form method="post" th:action="@{/borrow/issue}">
+            <div class="mb-3">
+                <label class="form-label">Book</label>
+                <select class="form-select" name="bookId" required>
+                    <option selected disabled value="">-- Select Book --</option>
+                    <option th:each="book : ${books}" th:value="${book.id}" th:text="${book.title} + ' (' + ${book.author} + ')'"></option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Member</label>
+                <select class="form-select" name="memberId" required>
+                    <option selected disabled value="">-- Select Member --</option>
+                    <option th:each="member : ${members}" th:value="${member.id}" th:text="${member.name}  + ' (' + ${member.email} + ')'"></option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Issue</button>
+            <a class="btn btn-outline-secondary" th:href="@{/borrow}">Cancel</a>
+        </form>
+    </div>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+<div th:replace="~{fragments/footer :: scripts}"></div>
+</body>
+</html>
